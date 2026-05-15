@@ -12,7 +12,7 @@ description: Genoplastic Surgery Laboratory — coming soon.
 
   <span class="gs-cs-eyebrow">Site coming soon</span>
 
-  <p class="gs-cs-name">Genoplastic Surgery Laboratory · David A. Brown, MD · University of Michigan</p>
+  <p class="gs-cs-name">Genoplastic Surgery Laboratory · David A. Brown, MD, PhD · University of Michigan</p>
 
   <p class="gs-cs-tag">A lab at the intersection of plastic surgery, regenerative medicine, and gene therapy. Full site arriving soon.</p>
 

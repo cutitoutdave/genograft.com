@@ -13,7 +13,7 @@ profiles:
     content: about_david_brown.md
     image_circular: true
     more_info: >
-      <p><strong>David A. Brown, MD</strong></p>
+      <p><strong>David A. Brown, MD, PhD</strong></p>
       <p>Principal Investigator</p>
       <p>University of Michigan</p>
 ---

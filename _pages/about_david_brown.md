@@ -1,4 +1,4 @@
-# David A. Brown, MD
+# David A. Brown, MD, PhD
 
 **Principal Investigator** · Associate Professor of Surgery, University of Michigan
 
