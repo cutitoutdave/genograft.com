@@ -1,0 +1,429 @@
+/* =============================================================================
+   Genograft / Genoplastic Surgery Lab — visual identity overrides
+   Loaded last by main.scss so these win over al-folio defaults.
+   ============================================================================= */
+
+/* -- 1. Brand palette ------------------------------------------------------- */
+:root {
+  --gs-primary: #4f46e5;    /* indigo-600 — matches logo blue */
+  --gs-accent:  #8b5cf6;    /* violet-500 — matches logo purple */
+  --gs-pink:    #ec4899;    /* hero-logo pink accent */
+  --gs-deep:    #1e1b4b;    /* indigo-950 — headers */
+  --gs-soft:    #eef2ff;    /* indigo-50 — section backgrounds */
+
+  --gs-gradient: linear-gradient(135deg, var(--gs-primary) 0%, var(--gs-accent) 55%, var(--gs-pink) 100%);
+  --gs-gradient-soft: linear-gradient(135deg, rgba(79,70,229,0.06) 0%, rgba(139,92,246,0.06) 55%, rgba(236,72,153,0.04) 100%);
+
+  --global-theme-color: var(--gs-primary);
+  --global-hover-color: var(--gs-accent);
+  --global-hover-text-color: #ffffff;
+}
+
+html[data-theme="dark"] {
+  --gs-soft: rgba(79, 70, 229, 0.08);
+  --global-theme-color: #a5b4fc;        /* indigo-300 for contrast on dark */
+  --global-hover-color: #c4b5fd;        /* violet-300 */
+}
+
+/* -- 2. Hero (home page) ---------------------------------------------------- */
+.gs-hero {
+  position: relative;
+  margin: -1.5rem -1rem 3.5rem;
+  padding: 4rem 1.5rem 4.5rem;
+  border-radius: 1.25rem;
+  background: var(--gs-gradient-soft);
+  overflow: hidden;
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(80% 60% at 90% 20%, rgba(139,92,246,0.18), transparent 60%),
+                radial-gradient(60% 50% at 10% 90%, rgba(79,70,229,0.18), transparent 60%);
+    pointer-events: none;
+  }
+
+  .gs-hero-inner {
+    position: relative;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 3rem;
+    align-items: center;
+    max-width: 100%;
+  }
+
+  .gs-hero-text {
+    .gs-eyebrow {
+      display: inline-block;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gs-primary);
+      margin-bottom: 1rem;
+    }
+
+    h1 {
+      font-size: clamp(2rem, 4.5vw, 3.4rem);
+      font-weight: 800;
+      line-height: 1.05;
+      margin: 0 0 1rem;
+      color: var(--gs-deep);
+      letter-spacing: -0.02em;
+    }
+
+    .gs-tag {
+      font-size: clamp(1rem, 1.6vw, 1.25rem);
+      line-height: 1.5;
+      max-width: 38ch;
+      color: var(--global-text-color);
+      opacity: 0.85;
+      margin: 0 0 1.75rem;
+    }
+
+    .gs-cta-row {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+  }
+
+  .gs-hero-art {
+    width: clamp(160px, 22vw, 280px);
+    aspect-ratio: 1 / 1;
+    border-radius: 1rem;
+    background: #ffffff;
+    box-shadow: 0 20px 50px -15px rgba(79, 70, 229, 0.35),
+                0 6px 20px -8px rgba(139, 92, 246, 0.25);
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: rotate(-2deg);
+    transition: transform 0.4s ease;
+
+    &:hover { transform: rotate(0deg) scale(1.02); }
+
+    img { width: 100%; height: 100%; object-fit: contain; }
+  }
+}
+
+html[data-theme="dark"] .gs-hero {
+  background: linear-gradient(135deg, rgba(79,70,229,0.12) 0%, rgba(139,92,246,0.10) 55%, rgba(236,72,153,0.06) 100%);
+
+  .gs-hero-text h1 { color: #ffffff; }
+  .gs-hero-art { background: #0f0e2e; }
+}
+
+@media (max-width: 720px) {
+  .gs-hero {
+    padding: 2.5rem 1.25rem 3rem;
+    margin: -1rem -0.5rem 2.5rem;
+    .gs-hero-inner {
+      grid-template-columns: 1fr;
+      gap: 1.75rem;
+      text-align: center;
+    }
+    .gs-hero-text .gs-tag { margin-left: auto; margin-right: auto; }
+    .gs-hero-text .gs-cta-row { justify-content: center; }
+    .gs-hero-art { margin: 0 auto; transform: none; }
+  }
+}
+
+/* -- 3. CTA buttons --------------------------------------------------------- */
+.gs-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.7rem 1.3rem;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  text-decoration: none !important;
+  transition: transform 0.15s ease, box-shadow 0.2s ease, background 0.2s ease;
+  border: 1.5px solid transparent;
+  cursor: pointer;
+  white-space: nowrap;
+
+  &.gs-btn-primary {
+    background: var(--gs-gradient);
+    color: #ffffff !important;
+    box-shadow: 0 6px 18px -6px rgba(79, 70, 229, 0.55);
+    &:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 10px 26px -8px rgba(79, 70, 229, 0.65);
+      color: #ffffff !important;
+    }
+  }
+
+  &.gs-btn-ghost {
+    background: transparent;
+    border-color: var(--gs-primary);
+    color: var(--gs-primary) !important;
+    &:hover {
+      background: var(--gs-primary);
+      color: #ffffff !important;
+      transform: translateY(-1px);
+    }
+  }
+}
+
+/* -- 4. Research-theme cards ------------------------------------------------ */
+.gs-card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.25rem;
+  margin: 2rem 0 3rem;
+}
+
+.gs-card {
+  position: relative;
+  padding: 1.6rem 1.5rem;
+  border-radius: 1rem;
+  background: var(--global-card-bg-color, #ffffff);
+  border: 1px solid var(--global-divider-color, rgba(0,0,0,0.08));
+  transition: transform 0.2s ease, box-shadow 0.25s ease, border-color 0.2s ease;
+  overflow: hidden;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: var(--gs-gradient);
+    opacity: 0.85;
+  }
+
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 14px 32px -16px rgba(79, 70, 229, 0.35);
+    border-color: rgba(139, 92, 246, 0.35);
+  }
+
+  .gs-card-icon {
+    font-size: 1.9rem;
+    line-height: 1;
+    margin-bottom: 0.75rem;
+    display: inline-block;
+  }
+
+  h3 {
+    font-size: 1.15rem;
+    font-weight: 700;
+    margin: 0 0 0.6rem;
+    color: var(--gs-deep);
+    letter-spacing: -0.01em;
+  }
+
+  p { font-size: 0.95rem; line-height: 1.55; margin: 0; opacity: 0.85; }
+}
+
+html[data-theme="dark"] .gs-card {
+  background: #1a1a3a;
+  border-color: rgba(255, 255, 255, 0.08);
+  h3 { color: #e0e7ff; }
+  &:hover { border-color: rgba(165, 180, 252, 0.4); }
+}
+
+/* -- 5. Section banding + research-page hero -------------------------------- */
+.gs-section-band {
+  margin: 3rem -1rem;
+  padding: 2.5rem 1.5rem;
+  background: var(--gs-soft);
+  border-radius: 1rem;
+}
+
+.gs-research-hero {
+  position: relative;
+  margin: -1rem -1rem 2.5rem;
+  padding: 3rem 2rem;
+  border-radius: 1.25rem;
+  background: var(--gs-gradient);
+  color: #ffffff;
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 2rem;
+  align-items: center;
+
+  .gs-research-hero-text {
+    h1 { font-size: clamp(1.8rem, 3.5vw, 2.6rem); font-weight: 800; margin: 0 0 0.5rem; color: #ffffff; letter-spacing: -0.015em; }
+    p  { font-size: 1.05rem; line-height: 1.55; margin: 0; opacity: 0.95; max-width: 50ch; }
+  }
+
+  .gs-research-hero-art {
+    width: clamp(120px, 18vw, 200px);
+    aspect-ratio: 1 / 1;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 1rem;
+    padding: 0.4rem;
+    img { width: 100%; height: 100%; object-fit: contain; }
+  }
+}
+
+@media (max-width: 720px) {
+  .gs-research-hero {
+    grid-template-columns: 1fr;
+    text-align: center;
+    .gs-research-hero-art { margin: 0 auto; }
+  }
+}
+
+/* -- 6. Typography polish --------------------------------------------------- */
+.post-title,
+.gs-hero h1,
+.gs-research-hero h1 { letter-spacing: -0.02em; }
+
+article h2 {
+  font-weight: 700;
+  letter-spacing: -0.015em;
+  margin-top: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+article h2:first-child { margin-top: 0; }
+
+/* underline link decoration on body copy looks nicer */
+.post a:not(.gs-btn):not(.nav-link):not(.social-icon-link) {
+  text-decoration: none;
+  border-bottom: 1.5px solid rgba(79, 70, 229, 0.3);
+  transition: border-color 0.15s ease, color 0.15s ease;
+  &:hover { border-bottom-color: var(--gs-accent); color: var(--gs-accent); }
+}
+
+/* -- 7. Subtle entrance animation ------------------------------------------- */
+@keyframes gs-fade-up {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.gs-hero,
+.gs-research-hero,
+.gs-card-grid > .gs-card,
+article > * { animation: gs-fade-up 0.55s ease-out both; }
+
+.gs-card-grid > .gs-card:nth-child(2) { animation-delay: 0.06s; }
+.gs-card-grid > .gs-card:nth-child(3) { animation-delay: 0.12s; }
+.gs-card-grid > .gs-card:nth-child(4) { animation-delay: 0.18s; }
+
+@media (prefers-reduced-motion: reduce) {
+  .gs-hero, .gs-research-hero, .gs-card, article > * { animation: none; }
+}
+
+/* -- 8. Hide the legacy float-profile when hero is in use ------------------- */
+.gs-has-hero .profile { display: none; }
+
+/* -- 9. Navbar polish (slightly bolder brand link) ------------------------- */
+.navbar-brand .font-weight-bold { font-weight: 800; letter-spacing: -0.01em; }
+
+/* -- 10. Coming-soon presentation ------------------------------------------ */
+.gs-coming-soon {
+  min-height: 70vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 3rem 1rem 4rem;
+  position: relative;
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(60% 50% at 50% 30%, rgba(79,70,229,0.10), transparent 70%),
+                radial-gradient(40% 40% at 80% 80%, rgba(236,72,153,0.08), transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  > * { position: relative; z-index: 1; }
+
+  .gs-cs-art {
+    width: clamp(180px, 28vw, 280px);
+    aspect-ratio: 1 / 1;
+    border-radius: 1.25rem;
+    background: #ffffff;
+    box-shadow: 0 30px 60px -20px rgba(79, 70, 229, 0.45),
+                0 10px 30px -10px rgba(139, 92, 246, 0.3);
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 2.5rem;
+    animation: gs-fade-up 0.6s ease-out both;
+
+    img { width: 90%; height: 90%; object-fit: contain; }
+  }
+
+  .gs-cs-eyebrow {
+    display: inline-block;
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gs-primary);
+    margin-bottom: 1rem;
+    animation: gs-fade-up 0.6s 0.1s ease-out both;
+  }
+
+  h1 {
+    font-size: clamp(2.4rem, 6vw, 4rem);
+    font-weight: 800;
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+    margin: 0 0 1rem;
+    background: var(--gs-gradient);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: gs-fade-up 0.6s 0.15s ease-out both;
+  }
+
+  .gs-cs-name {
+    font-size: clamp(1.05rem, 2vw, 1.35rem);
+    font-weight: 700;
+    color: var(--gs-deep);
+    margin: 0 0 1rem;
+    letter-spacing: -0.01em;
+    animation: gs-fade-up 0.6s 0.2s ease-out both;
+  }
+
+  .gs-cs-tag {
+    font-size: clamp(0.95rem, 1.4vw, 1.1rem);
+    line-height: 1.55;
+    max-width: 44ch;
+    color: var(--global-text-color);
+    opacity: 0.8;
+    margin: 0 auto 2rem;
+    animation: gs-fade-up 0.6s 0.25s ease-out both;
+  }
+
+  .gs-cs-contact {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+    padding: 0.7rem 1.4rem;
+    border-radius: 999px;
+    background: var(--gs-gradient);
+    color: #ffffff !important;
+    text-decoration: none !important;
+    box-shadow: 0 8px 22px -8px rgba(79, 70, 229, 0.55);
+    transition: transform 0.15s ease, box-shadow 0.2s ease;
+    animation: gs-fade-up 0.6s 0.3s ease-out both;
+    border: none;
+
+    &:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 12px 30px -8px rgba(79, 70, 229, 0.65);
+      color: #ffffff !important;
+    }
+  }
+}
+
+html[data-theme="dark"] .gs-coming-soon {
+  .gs-cs-name { color: #e0e7ff; }
+  .gs-cs-art { background: #0f0e2e; }
+}

@@ -1,14 +1,9 @@
+# GitHub profiles and repositories shown on the (currently hidden) /repositories/ page.
+# Re-enable that page in _pages/repositories.md if you want to display this.
+
 github_users:
-  - torvalds
-  - alshedivat
+  - cutitoutdave
 
 repo_description_lines_max: 2
 
-github_repos:
-  - alshedivat/al-folio
-  - jekyll/jekyll
-  - twbs/bootstrap
-  - jquery/jquery
-  - FortAwesome/Font-Awesome
-  - mathjax/MathJax
-  - jpswalsh/academicons
+github_repos: []

@@ -1,32 +1,57 @@
 ---
 layout: default
 ---
-<div class="post">
-  <header class="post-header">
-    <h1 class="post-title">
-      {% if site.title == 'blank' %}
-        <span class="font-weight-bold">{{ site.first_name }}</span> {{ site.middle_name }}
-        {{ site.last_name }}
-      {% else %}
-        {{ site.title }}
-      {% endif %}
-    </h1>
-    <p class="desc">{{ page.subtitle }}</p>
-  </header>
+<div class="post {% if page.hero and page.hero.enabled %}gs-has-hero{% endif %}">
+
+  {% if page.hero and page.hero.enabled %}
+    <section class="gs-hero">
+      <div class="gs-hero-inner">
+        <div class="gs-hero-text">
+          {% if page.hero.eyebrow %}<span class="gs-eyebrow">{{ page.hero.eyebrow }}</span>{% endif %}
+          <h1>{{ page.hero.title }}</h1>
+          {% if page.hero.tagline %}<p class="gs-tag">{{ page.hero.tagline }}</p>{% endif %}
+          {% if page.hero.ctas %}
+            <div class="gs-cta-row">
+              {% for cta in page.hero.ctas %}
+                <a href="{{ cta.href | relative_url }}" class="gs-btn {% if cta.style == 'ghost' %}gs-btn-ghost{% else %}gs-btn-primary{% endif %}">
+                  {{ cta.label }}{% if cta.arrow %} →{% endif %}
+                </a>
+              {% endfor %}
+            </div>
+          {% endif %}
+        </div>
+        {% if page.hero.image %}
+          <div class="gs-hero-art">
+            <img src="{{ page.hero.image | prepend: '/assets/img/' | relative_url }}" alt="{{ page.hero.image_alt | default: page.hero.title }}" loading="eager" />
+          </div>
+        {% endif %}
+      </div>
+    </section>
+  {% else %}
+    <header class="post-header">
+      <h1 class="post-title">
+        {% if site.title == 'blank' %}
+          <span class="font-weight-bold">{{ site.first_name }}</span> {{ site.middle_name }}
+          {{ site.last_name }}
+        {% else %}
+          {{ site.title }}
+        {% endif %}
+      </h1>
+      <p class="desc">{{ page.subtitle }}</p>
+    </header>
+  {% endif %}
 
   <article>
-    {% if page.profile %}
+    {% if page.profile and page.hero.enabled != true %}
       <div class="profile float-{% if page.profile.align == 'left' %}left{% else %}right{% endif %}">
         {% if page.profile.image %}
           {% assign profile_image_path = page.profile.image | prepend: 'assets/img/' %}
           {% if page.profile.image_circular %}
             {% assign profile_image_class = 'img-fluid z-depth-1 rounded-circle' %}
           {% else %}
-            {% assign profile_image_class = 'img-fluid z-depth-1
-      rounded' %}
+            {% assign profile_image_class = 'img-fluid z-depth-1 rounded' %}
           {% endif %}
-          {% capture sizes %}(min-width: {{ site.max_width }}) {{ site.max_width | minus: 30 | times: 0.3}}px, (min-width: 576px)
-      30vw, 95vw"{% endcapture %}
+          {% capture sizes %}(min-width: {{ site.max_width }}) {{ site.max_width | minus: 30 | times: 0.3 }}px, (min-width: 576px) 30vw, 95vw"{% endcapture %}
           {%
             include figure.liquid loading="eager" path=profile_image_path class=profile_image_class sizes=sizes alt=page.profile.image
             cache_bust=true
@@ -68,7 +93,6 @@ layout: default
     {% if page.social %}
       <div class="social">
         <div class="contact-icons">{% social_links %}</div>
-
         <div class="contact-note">{{ site.contact_note }}</div>
       </div>
     {% endif %}
